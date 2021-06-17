@@ -1,15 +1,17 @@
 package com.kauruck.coastEngine.centum.entity;
 
 import com.kauruck.coastEngine.centum.component.AbstractComponent;
+import com.kauruck.coastEngine.core.math.Vector2;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("unused")
-public class GlobalEntity {
+public class Entity {
     private int id;
 
     private final List<AbstractComponent> components = new ArrayList<AbstractComponent>();
+
 
     public void addComponent(AbstractComponent component){
         this.components.add(component);

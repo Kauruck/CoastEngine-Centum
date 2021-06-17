@@ -1,7 +1,7 @@
 package com.kauruck.coastEngine.centum.world;
 
 import com.kauruck.coastEngine.centum.component.AbstractComponent;
-import com.kauruck.coastEngine.centum.entity.GlobalEntity;
+import com.kauruck.coastEngine.centum.entity.Entity;
 import com.kauruck.coastEngine.centum.system.AbstractSystem;
 
 import java.util.ArrayList;
@@ -11,25 +11,26 @@ public class World {
     private int id;
     private boolean active = true;
 
-    private final List<GlobalEntity> globalEntities = new ArrayList<GlobalEntity>();
+    private final List<Entity> entities = new ArrayList<>();
 
     public World() {
     }
 
     public void processEntities(float deltaTime, AbstractSystem<?> system){
-        for(GlobalEntity current : globalEntities){
+        for(Entity current : entities){
             AbstractComponent component = current.getComponent(system.getComponentClass());
             if(component != null)
-                system.process(component);
+                system.process(component, deltaTime);
+
         }
     }
 
-    public void addGlobalEntity(GlobalEntity entity){
-        globalEntities.add(entity);
+    public void addEntity(Entity entity){
+        entities.add(entity);
     }
 
-    public void removeGlobalEntity(GlobalEntity entity){
-        globalEntities.remove(entity);
+    public void removeEntity(Entity entity){
+        entities.remove(entity);
     }
 
     public void onCreate(){}

@@ -20,5 +20,5 @@ public abstract class AbstractSystem<Component extends AbstractComponent> {
         return componentClass;
     }
 
-    public abstract void process(AbstractComponent component);
+    public abstract void process(AbstractComponent component, float deltaTime);
 }
