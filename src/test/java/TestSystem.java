@@ -7,7 +7,7 @@ public class TestSystem extends AbstractSystem<TestComponent> {
     }
 
     @Override
-    public void process(AbstractComponent component) {
+    public void process(AbstractComponent component, float deltaTime) {
         if(component instanceof TestComponent){
             TestComponent comp = (TestComponent) component;
             System.out.println(comp.test);

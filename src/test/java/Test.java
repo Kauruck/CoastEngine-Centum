@@ -1,5 +1,5 @@
 import com.kauruck.coastEngine.centum.Centum;
-import com.kauruck.coastEngine.centum.entity.GlobalEntity;
+import com.kauruck.coastEngine.centum.entity.Entity;
 import com.kauruck.coastEngine.centum.world.World;
 
 public class Test {
@@ -9,8 +9,8 @@ public class Test {
         Centum.startSystems();
         World world = new World();
         Centum.registerWorld(world);
-        GlobalEntity testEntity = new GlobalEntity();
+        Entity testEntity = new Entity();
         testEntity.addComponent(new TestComponent());
-        world.addGlobalEntity(testEntity);
+        world.addEntity(testEntity);
     }
 }

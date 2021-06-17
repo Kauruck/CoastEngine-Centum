@@ -1,5 +1,6 @@
 package com.kauruck.coastEngine.centum;
 
+import com.kauruck.coastEngine.centum.component.AbstractComponent;
 import com.kauruck.coastEngine.centum.system.AbstractSystem;
 import com.kauruck.coastEngine.centum.world.World;
 import com.kauruck.coastEngine.core.exception.NoSuchProcessException;
@@ -16,9 +17,9 @@ public class Centum {
 
     public static final Logger logger = LoggerFactory.getLogger("Centum");
 
-    private static final List<World> worlds = new ArrayList<World>();
-    private static final List<AbstractSystem<?>> systems = new ArrayList<AbstractSystem<?>>();
-    private static final List<Integer> processes = new ArrayList<Integer>();
+    private static final List<World> worlds = new ArrayList<>();
+    private static final List<AbstractSystem<?>> systems = new ArrayList<>();
+    private static final List<Integer> processes = new ArrayList<>();
 
     public static void registerWorld(World world){
         worlds.add(world);
