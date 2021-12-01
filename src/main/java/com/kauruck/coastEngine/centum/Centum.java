@@ -60,6 +60,10 @@ public class Centum {
         registerSystem(system, null, onEnd);
     }
 
+    public static void registerSystem(AbstractSystem<?> system) {
+        registerSystem(system, null, null);
+    }
+
 
     public static void removeSystem(AbstractSystem<?> system){
         systems.remove(system);
