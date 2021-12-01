@@ -4,7 +4,7 @@ import com.kauruck.coastEngine.centum.world.World;
 
 public class Test {
 
-    public static void main(String[] args){
+    /*public static void main(String[] args){
         Centum.registerSystem(new TestSystem());
         Centum.startSystems();
         World world = new World();
@@ -12,5 +12,5 @@ public class Test {
         Entity testEntity = new Entity();
         testEntity.addComponent(new TestComponent());
         world.addEntity(testEntity);
-    }
+    }*/
 }

@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Maven: com.kauruck.coastengine:coastengine.core:2.0-SNAPSHOT">
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/com/kauruck/coastengine/coastengine.core/2.0-SNAPSHOT/coastengine.core-2.0-20210609.120607-1.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/kauruck/coastengine/coastengine.core/2.0-SNAPSHOT/coastengine.core-2.0-20211123.195452-2.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$MAVEN_REPOSITORY$/com/kauruck/coastengine/coastengine.core/2.0-SNAPSHOT/coastengine.core-2.0-20210609.120607-1-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/kauruck/coastengine/coastengine.core/2.0-SNAPSHOT/coastengine.core-2.0-20211123.195452-2-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$MAVEN_REPOSITORY$/com/kauruck/coastengine/coastengine.core/2.0-SNAPSHOT/coastengine.core-2.0-20210609.120607-1-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/kauruck/coastengine/coastengine.core/2.0-SNAPSHOT/coastengine.core-2.0-20211123.195452-2-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
