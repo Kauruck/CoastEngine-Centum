@@ -46,22 +46,75 @@ public class Centum {
         world.setActive(status);
     }
 
-    public static void registerSystem(AbstractSystem<?> system, @Nullable OnStartExecutor onStart, @Nullable OnEndExecutor onEnd){
+    public static void registerSystem(AbstractSystem<?> system, @Nullable OnStartExecutor onStart, @Nullable OnEndExecutor onEnd, @Nullable Centum.OnTickStartExecutor onTickStart, @Nullable Centum.OnTickEndExecutor onTickEnd){
         systems.add(system);
-        threadsToCreate.add(new SystemThread(system, onStart, onEnd));
+        threadsToCreate.add(new SystemThread(system, onStart, onEnd, onTickStart, onTickEnd));
+    }
+
+    public static void registerSystem(AbstractSystem<?> system, @Nullable OnStartExecutor onStart, @Nullable OnEndExecutor onEnd, @Nullable Centum.OnTickStartExecutor onTickStart){
+        registerSystem(system, onStart, onEnd, onTickStart, null);
+    }
+
+    public static void registerSystem(AbstractSystem<?> system, @Nullable OnStartExecutor onStart, @Nullable OnEndExecutor onEnd, @Nullable Centum.OnTickEndExecutor onTickEnd){
+        registerSystem(system, onStart, onEnd, null, onTickEnd);
     }
 
     public static void registerSystem(AbstractSystem<?> system, OnStartExecutor onStart) {
-        registerSystem(system, onStart, null);
+        registerSystem(system, onStart, null, null, null);
         
     }
 
     public static void registerSystem(AbstractSystem<?> system, OnEndExecutor onEnd) {
-        registerSystem(system, null, onEnd);
+        registerSystem(system, null, onEnd ,null, null);
     }
 
     public static void registerSystem(AbstractSystem<?> system) {
-        registerSystem(system, null, null);
+        registerSystem(system, null, null, null, null);
+    }
+
+
+
+    public static void registerSystem(AbstractSystem<?> system, OnStartExecutor onStart, OnTickStartExecutor onTickStart) {
+        registerSystem(system, onStart, null, onTickStart, null);
+
+    }
+
+    public static void registerSystem(AbstractSystem<?> system, OnEndExecutor onEnd, OnTickStartExecutor onTickStart) {
+        registerSystem(system, null, onEnd ,onTickStart, null);
+    }
+
+    public static void registerSystem(AbstractSystem<?> system, OnTickStartExecutor onTickStart) {
+        registerSystem(system, null, null, onTickStart, null);
+    }
+
+
+
+    public static void registerSystem(AbstractSystem<?> system, OnStartExecutor onStart, OnTickEndExecutor onTickEnd) {
+        registerSystem(system, onStart, null, null, onTickEnd);
+
+    }
+
+    public static void registerSystem(AbstractSystem<?> system, OnEndExecutor onEnd, OnTickEndExecutor onTickEnd) {
+        registerSystem(system, null, onEnd ,null, onTickEnd);
+    }
+
+    public static void registerSystem(AbstractSystem<?> system, OnTickEndExecutor onTickEnd) {
+        registerSystem(system, null, null, null, onTickEnd);
+    }
+
+
+
+    public static void registerSystem(AbstractSystem<?> system, OnStartExecutor onStart, OnTickStartExecutor onTickStart, OnTickEndExecutor onTickEnd) {
+        registerSystem(system, onStart, null, onTickStart, onTickEnd);
+
+    }
+
+    public static void registerSystem(AbstractSystem<?> system, OnEndExecutor onEnd, OnTickStartExecutor onTickStart, OnTickEndExecutor onTickEnd) {
+        registerSystem(system, null, onEnd ,onTickStart, onTickEnd);
+    }
+
+    public static void registerSystem(AbstractSystem<?> system, OnTickStartExecutor onTickStart, OnTickEndExecutor onTickEnd) {
+        registerSystem(system, null, null, onTickStart, onTickEnd);
     }
 
 
@@ -101,23 +154,41 @@ public class Centum {
         void execute();
     }
 
+    @FunctionalInterface
+    public interface OnTickStartExecutor {
+        void execute();
+    }
+
+    @FunctionalInterface
+    public interface OnTickEndExecutor {
+        void execute();
+    }
+
     private static class SystemThread extends Thread{
 
         private final AbstractSystem<?> system;
         private final OnStartExecutor onStart;
         private final OnEndExecutor onEnd;
+        private final OnTickStartExecutor onTickStart;
+        private final OnTickEndExecutor onTickEnd;
 
-        public SystemThread(AbstractSystem<?> system, @Nullable  OnStartExecutor onStart, @Nullable  OnEndExecutor onEnd) {
+        public SystemThread(AbstractSystem<?> system, @Nullable OnStartExecutor onStart, @Nullable OnEndExecutor onEnd, OnTickStartExecutor onTickStart, OnTickEndExecutor onTickEnd) {
             super(system.getMaxFps());
             this.system = system;
             this.onStart = onStart;
             this.onEnd = onEnd;
+            this.onTickStart = onTickStart;
+            this.onTickEnd = onTickEnd;
         }
 
         public void onTick(float v) {
+            if(onTickStart != null)
+                onTickStart.execute();
             worlds.stream().
                     filter(World::isActive)
                     .forEach(current -> current.processEntities(v, system));
+            if(onTickEnd != null)
+                onTickEnd.execute();
         }
 
         public void onStart() {
