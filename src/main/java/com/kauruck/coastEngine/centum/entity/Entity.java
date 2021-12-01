@@ -10,10 +10,11 @@ import java.util.List;
 public class Entity {
     private int id;
 
-    private final List<AbstractComponent> components = new ArrayList<AbstractComponent>();
+    private final List<AbstractComponent> components = new ArrayList<>();
 
 
     public void addComponent(AbstractComponent component){
+        component.setEntity(this);
         this.components.add(component);
     }
 
