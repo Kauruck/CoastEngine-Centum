@@ -21,6 +21,11 @@ public class Centum {
     private static final List<AbstractSystem<?>> systems = new ArrayList<>();
     private static final List<Integer> processes = new ArrayList<>();
     private static final List<Thread> threadsToCreate = new ArrayList<>();
+    private static final List<AbstractSystem<?>> toInit = new ArrayList<>();
+
+    public static boolean isStarted(){
+        return toInit.size() == 0;
+    }
 
     public static void registerWorld(World world){
         worlds.add(world);
@@ -133,6 +138,28 @@ public class Centum {
     public static void startSystems(){
         for(Thread thread : threadsToCreate){
             int currentPID = ThreadManger.addThread(thread);
+            toInit.add(((SystemThread)thread).system);
+            try {
+                ThreadManger.startTread(currentPID);
+            } catch (NoSuchProcessException ignored) {
+
+            }
+            processes.add(currentPID);
+        }
+        threadsToCreate.clear();
+        while (!isStarted()){
+            try {
+                java.lang.Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void startSystemInDetach(){
+        for(Thread thread : threadsToCreate){
+            int currentPID = ThreadManger.addThread(thread);
+            toInit.add(((SystemThread)thread).system);
             try {
                 ThreadManger.startTread(currentPID);
             } catch (NoSuchProcessException ignored) {
@@ -161,6 +188,11 @@ public class Centum {
 
     @FunctionalInterface
     public interface OnTickEndExecutor {
+        void execute();
+    }
+
+    @FunctionalInterface
+    public interface OnStartDown {
         void execute();
     }
 
@@ -194,6 +226,7 @@ public class Centum {
         public void onStart() {
             if(onStart != null)
                 onStart.execute();
+            toInit.remove(system);
         }
 
         public void onEnd() {
