@@ -28,7 +28,7 @@ public class Entity {
 
     public AbstractComponent getComponent(Class<? extends AbstractComponent> componentClass){
         for(AbstractComponent current : components){
-            if(current.getClass() == componentClass)
+            if(current.getClass() == componentClass || current.getClass().getSuperclass() == componentClass)
                 return current;
         }
         return null;
