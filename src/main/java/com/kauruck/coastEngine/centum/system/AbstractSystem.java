@@ -21,4 +21,8 @@ public abstract class AbstractSystem<Component extends AbstractComponent> {
     }
 
     public abstract void process(AbstractComponent component, float deltaTime);
+
+    public abstract void pre();
+
+    public abstract void post();
 }

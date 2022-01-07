@@ -14,4 +14,14 @@ public class TestSystem extends AbstractSystem<TestComponent> {
             comp.test++;
         }
     }
+
+    @Override
+    public void pre() {
+
+    }
+
+    @Override
+    public void post() {
+
+    }
 }
