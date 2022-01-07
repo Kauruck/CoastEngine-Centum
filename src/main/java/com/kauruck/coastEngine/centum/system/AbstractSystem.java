@@ -1,6 +1,7 @@
 package com.kauruck.coastEngine.centum.system;
 
 import com.kauruck.coastEngine.centum.component.AbstractComponent;
+import com.kauruck.coastEngine.core.resources.ResourceLocation;
 
 public abstract class AbstractSystem<Component extends AbstractComponent> {
 
@@ -25,4 +26,6 @@ public abstract class AbstractSystem<Component extends AbstractComponent> {
     public abstract void pre();
 
     public abstract void post();
+
+    public abstract ResourceLocation getID();
 }

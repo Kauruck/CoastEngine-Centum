@@ -1,5 +1,6 @@
 import com.kauruck.coastEngine.centum.component.AbstractComponent;
 import com.kauruck.coastEngine.centum.system.AbstractSystem;
+import com.kauruck.coastEngine.core.resources.ResourceLocation;
 
 public class TestSystem extends AbstractSystem<TestComponent> {
     public TestSystem() {
@@ -23,5 +24,10 @@ public class TestSystem extends AbstractSystem<TestComponent> {
     @Override
     public void post() {
 
+    }
+
+    @Override
+    public ResourceLocation getID() {
+        return new ResourceLocation("test","testSystem");
     }
 }
